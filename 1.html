@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<title>Гуценков Никита</title>
+<Style>
+    main {
+        margin: 50px;
+        background: #fff;
+        padding-left: 15px
+    }
+
+    table {
+        margin: 50px;
+        background: #fff;
+    }
+
+    h1 {
+        text-align: center;
+    }
+</Style>
+<main>
+    <body style="background-color:#d3d3d3;">
+    <h1>Лабораторная работа №1</h1>
+    <h2>Гуценков Никита. Вариант 7</h2>
+    <h2>Задание 1</h2>
+
+    <p>Вы совершаете покупку в магазинах евроторга. Написать сценарий, в котором с использованием метода prompt вводится
+        общая сумма покупки, вводится скидка в размере от 1 до 5 %. В окне документа должны быть отображены: общая
+        стоимость покупки, скидка в рублях и стоимость покупки со скидкой.</p>
+
+    <button onclick="myFunction1()">Выполнить</button>
+    <script>
+        function myFunction1() {
+            // введем сумму покупки и скидки
+            let price = prompt("Сумма покупки");
+            let discount = prompt("Скидка");
+            // скидка это число от 1 до 5
+            if (discount >= 1 && discount <= 5) {
+                // считаем
+                let f1 = price / 100 * discount;
+                let f2 = price - f1;
+                // вывод ответа
+                alert("Общая стоимость покупки " + price +
+                    "\nСкидка в рублях " + f1 +
+                    "\nСтоимость покупки со скидкой " + f2);
+            }
+        }
+    </script>
+
+    <h2>Задание 2</h2>
+
+    <p>В соответствии с вариантом необходимо написать скрипт для вычисления значения переменной b. Исходные данные
+        вводятся с использованием метода prompt. При выводе информации предусмотреть форматирование документа, вывод
+        текста задания, включая рисунок исходного выражения, и вывод информации о разработчике скрипта.</p>
+    <img src="./img/1.png"><br>
+
+    <button onclick="myFunction2()">Выполнить</button>
+    <script>
+        function myFunction2() {
+            // введем x y z
+            let x = prompt("Введите x");
+            let y = prompt("Введите y");
+            let z = prompt("Введите z");
+            // подсчет и ответ
+            let b = Math.abs(x - y) * (Math.pow(Math.sin(z), 2) + Math.tan(z));
+            // вывод ответа
+            alert("Ответ " + b);
+        }
+    </script>
+
+    <h2>Задание 3</h2>
+
+    <p>Пусть в скрипте задана переменная lang, которая может принимать значения «ru», «en», «fr» или «de», введенные
+        пользователем. Используя операторы if-else-elseif обеспечьте вывод на экран полного названия языка (русский,
+        английский и т.д.) в зависимости от того, что присвоено переменной lang. Обязательно предусмотрите случай
+        неверного задания значения переменной lang - тогда должна выводиться надпись «Язык неизвестен».</p>
+
+    <button onclick="myFunction3()">Выполнить</button>
+    <script>
+        function myFunction3() {
+            let lang = prompt("Введите язык «ru», «en», «fr» или «de»");
+            if (lang == "ru")
+                alert("Русский");
+            else if (lang == "en")
+                alert("Английский");
+            else if (lang == "fr")
+                alert("Французский");
+            else if (lang == "de")
+                alert("Немецкий");
+            else
+                alert("Язык неизвестен");
+        }
+    </script>
+
+    <h2>Задание 4</h2>
+
+    <p>Сделайте тоже самое, что в задании 3, но используя оператор switch (скрипт lab1-4.html)</p>
+
+    <button onclick="myFunction4()">Выполнить</button>
+    <script>
+        function myFunction4() {
+            let lang = prompt("Введите язык «ru», «en», «fr» или «de»");
+            switch (lang) {
+                case "ru":
+                    alert("Русский")
+                    break;
+                case "en":
+                    alert("Английский")
+                    break;
+                case "fr":
+                    alert("Французский")
+                    break;
+                case "de":
+                    alert("Немецкий")
+                    break;
+                default:
+                    alert("Язык неизвестен")
+            }
+        }
+    </script>
+
+    <h2>Задание 5</h2>
+
+    <p>В соответствии со своим вариантом необходимо написать Java-скрипт для вычисления значения функции
+        y. В выводимом файле предусмотреть форматирование документа, вывод текста задания на лабораторную работу,
+        включая рисунок исходной функции, и вывод информации о разработчике скрипта.</p>
+    <img src="./img/2.png"><br>
+
+    <button onclick="myFunction5()">Выполнить</button>
+    <script>
+        function myFunction5() {
+            // воод x
+            let x = prompt("Введите x");
+            // x должно быть числом
+            x = parseInt(x);
+            let y;
+            // подсчет
+            if (x >= "5" && x !== "9")
+                y = 8 * x + 1;
+            else if (x <= "1")
+                y = Math.pow(x, 2) + Math.abs(x);
+            else
+                y = Math.pow(x, 3) + Math.sqrt(x);
+            // вывод ответа
+            alert("Ответ " + y);
+        }
+    </script>
+
+    <h2>Задание 6</h2>
+
+    <p>В скрипте, используя вложенные циклы for, отобразите на экране таблицу 10×10, в ячейках которой идут
+        числа от 1 до 100. При этом красным цветом выделены «треугольные» числа, т.е. числа вида n(n+1)/2 (где n=1,2,…
+        14). Все другие числа черного цвета. Массивы не использовать! Ширина рамки таблицы равна 1, отступ содержимого
+        ячеек от границы равен 5.</p>
+    <img src="./img/3.png"><br>
+
+    <button onclick="myFunction6()">Выполнить</button>
+    <script>
+        function myFunction6() {
+            // создаем таблицу
+            const body = document.body,
+                tbl = document.createElement('table');
+            // стиль отображения таблицы
+            tbl.style.width = '400px';
+            tbl.style.height = '400px';
+            tbl.style.border = '1px solid black';
+            // счетчик для заполнения ячеек
+            let n = 0;
+
+            // высота
+            for (let i = 0; i < 10; i++) {
+                const tr = tbl.insertRow();
+                // ширина
+                for (let j = 0; j < 10; j++) {
+                    const td = tr.insertCell();
+                    // счетчик для заполнения ячеек +1
+                    n++;
+                    // заполнение ячейки с проверкой на «треугольные» числа
+                    if (isTriangular(n)) {
+                        td.appendChild(document.createTextNode(`${n}`));
+                        td.style.color = "red";
+                    } else
+                        td.appendChild(document.createTextNode(`${n}`));
+                    // отступ содержимого ячеек от границы равен 5
+                    td.style.padding = '5px';
+                    // ширина рамки таблицы равна 1
+                    td.style.border = '1px solid black';
+                }
+            }
+            document.write("Гуценков Никита");
+            document.body.appendChild(tbl);
+        }
+
+        // функция проверки на «треугольные» числа
+        function isTriangular(num) {
+            for (let nq=1;nq<=14;nq++) {
+                if (num==nq*(nq+1)/2)
+                    return true;
+            }
+            return false;
+        }
+    </script>
+
+    </body>
+</main>
+</html>

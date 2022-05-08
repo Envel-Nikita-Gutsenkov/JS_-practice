@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>Гуценков Никита</title>
+<Style>
+    main {
+        margin: 50px;
+        background: #fff;
+        padding-left: 15px
+    }
+
+    h1 {
+        text-align: center;
+    }
+</Style>
+<main>
+    <body style="background-color:#d3d3d3;">
+    <h1>Лабораторная работа №2</h1>
+    <h2>Гуценков Никита. Вариант 7</h2>
+
+    <h2>Задание 1</h2>
+
+    <p>В скрипте, используя аргументы size, day и color функции WeekDay(), отобразите названия дней недели уменьшающимся
+        размером (начиная с 7) и разными цветами:</p>
+    <img src="./img/4.png"><br>
+
+    <button onclick="WeekDay()">Выполнить</button>
+    <script>
+        function WeekDay() {
+            document.write("Гуценков Никита");
+            document.write("<p style=\"font-size:7mm;color:black;\">Понедельник</p>");
+            document.write("<p style=\"font-size:6mm;color:gray;\">Вторник</p>");
+            document.write("<p style=\"font-size:5mm;color:darkblue;\">Среда</p>");
+            document.write("<p style=\"font-size:4mm;color:blue;\">Четверг</p>");
+            document.write("<p style=\"font-size:3mm;color:saddlebrown;\">Пятница</p>");
+            document.write("<p style=\"font-size:2mm;color:magenta;\">Суббота</p>");
+            document.write("<p style=\"font-size:1mm;color:red;\">Воскресенье</p>");
+        }
+    </script>
+
+    <h2>Задание 2 (ничем не отличается от ЛР1)</h2>
+
+    <p>В соответствии со своим вариантом написать Java-скрипт для вычисления значения функции b=f(x,y,z). Значения x, y
+        и z должны вводиться пользователем, используя метод prompt. При выводе информации предусмотреть форматирование
+        документа, вывод текста задания, включая рисунок исходной функции, и вывод информации о разработчике
+        скрипта.</p>
+    <img src="./img/1.png"><br>
+
+    <button onclick="myFunction2()">Выполнить</button>
+    <script>
+        function myFunction2() {
+            // введем x y z
+            let x = prompt("Введите x");
+            let y = prompt("Введите y");
+            let z = prompt("Введите z");
+            // подсчет и ответ
+            let b = Math.abs(x - y) * (Math.pow(Math.sin(z), 2) + Math.tan(z));
+            // вывод ответа
+            alert("Ответ " + b);
+        }
+    </script>
+
+    <h2>Задание 3</h2>
+
+    <p>1. Создайте массив treug «треугольных» чисел, т.е. чисел вида n(n+1)/2 (где n=1,2,… 10) и выведите значения этого
+        массива на экран в строку (через 2 пробела).
+        <br>
+        2. Создайте массив kvd квадратов натуральных чисел от 1 до 10, выведите значения этого массива на экран в
+        строку.
+        <br>
+        3. Объедините эти 2 массива в массив rez, выведите результат на экран.
+        <br>
+        4. Отсортируйте массив rez в обратном порядке, выведите результат на экран. </p>
+
+    <button onclick="myFunction3()">Выполнить</button>
+    <script>
+        function myFunction3() {
+            document.write("Гуценков Никита<br>");
+            // пункт 1 с массивом treug будет выполнен в отдельной функции для более комфортной читаемости кода
+            counttreug();
+            // пункт 2 с массивом kvd будет выполнен в отдельной функции для более комфортной читаемости кода
+            countkvd();
+            // объединение массивов и вывод
+            rez = treug.concat(kvd);
+            document.write("<br><b>Значения массива rez:</b> ");
+            document.write(rez.join("&nbsp;&nbsp"));
+            // сортировка в обратном порядке и вывод
+            rez.sort(function (treug, kvd) {
+                return treug - kvd;
+            });
+            rez.reverse();
+            document.write("<br><b>Значения массива rez после сортировки:</b>");
+            document.write(rez.join("&nbsp;&nbsp"));
+
+        }
+
+        function counttreug() {
+            // создание массива treug
+            treug = [];
+            // подсчет элементов массива
+            let count = 0;
+            document.write("<b>Значения массива treug:</b>");
+
+            // попытки нахождения числа
+            for (let num = 1; num <= 100; num++)
+                // формула
+                for (let nq = 1; nq <= 10; nq++) {
+                    if (num == nq * (nq + 1) / 2) {
+                        // число подходит, занесение в массов
+                        treug[count] = num;
+                        // вывед значения этого массива на экран в строку (через 2 пробела)
+                        document.write("&nbsp;&nbsp", treug[count]);
+                        // следующий элемент массива
+                        count++;
+                    }
+                }
+        }
+
+        function countkvd() {
+            // создание массива kvd
+            kvd = [];
+            document.write("<br><b>Значения массива kvd:</b>");
+            // подсчет, ввод элементов массива и вывод
+            for (count = 1; count <= 10; count++) {
+                kvd[count] = Math.pow(count, 2);
+                document.write("&nbsp;&nbsp", kvd[count]);
+            }
+        }
+    </script>
+
+    <h2>Задание 4</h2>
+
+    <p>1. Сформируйте одномерный массив (не менее 15 элементов, для генерации значений массива можно воспользоваться
+        функцией random), выведите значения этого массива на экран в строку.
+        <br>
+        2. Выполните задание в соответствии с вариантом, не используя встроенные функции </p>
+    <img src="./img/5.png"><br>
+
+    <button onclick="myFunction4()">Выполнить</button>
+    <script>
+        function myFunction4() {
+            document.write("Гуценков Никита<br>");
+            // случайное заполнение 16 элементов массива цифрами от 0 до 99
+            mass = Array.from({length: 16}, () => Math.floor(Math.random() * 99));
+            document.write("<b>Полученный случайный массив:</b> ");
+            document.write(mass.join("&nbsp;&nbsp"));
+            // найдем минимальный элемент, не используя встроенные функции
+            let min = mass[0];
+            let index = 0;
+            for (let i = 0; i < 16; i++) {
+                if (mass[i] < min) {
+                    min = mass[i];
+                    index = i;
+                }
+            }
+            // меняем местами минимальный элемент с 3 элементом массива (индекс 2)
+            mass[index] = mass[2];
+            mass[2] = min;
+            document.write("<br><b>Полученный массив после выполнения задания:</b> ");
+            document.write(mass.join("&nbsp;&nbsp"));
+        }
+    </script>
+
+    <h2>Задание 5</h2>
+
+    <p>1. Создайте массивы fruits=[‘apple’,’pineapple’,’mango’,’melon’,’grape’]; citrus=[‘orange’,’lemon’,’lime’].
+        <br>
+        2. Последовательно, в каждой отдельной строчке, выведите:
+        <br>
+        а) массив fruits;
+        <br>
+        б) массив citrus;
+        <br>
+        в) объединенный массив fruits;
+        <br>
+        г) массив fruits, в котором после mango вставлены: pear, cherry, plum, raspberry, strawberry;
+        <br>
+        д) массив fruits, в котором удалены последние 3 элемента;
+        <br>
+        е) выведите отсортированный в алфавитном порядке массив fruits;
+        <br>
+        ж) выведите массив fruits в обратном алфавитном порядке;
+        <br>
+        з) выведите массив fruits, отсортированный по длине слов.</p>
+
+    <button onclick="myFunction5()">Выполнить</button>
+    <script>
+        function myFunction5() {
+            fruits=["apple","pineapple","mango","melon","grape"];
+            citrus=["orange","lemon","lime"];
+            document.write("Гуценков Никита");
+            // массив fruits
+            document.write("<br><b>Массив fruits:</b> ");
+            document.write(fruits.join(" "));
+            // массив citrus
+            document.write("<br><b>Массив citrus:</b> ");
+            document.write(citrus.join(" "));
+            // объединение
+            fruits = fruits.concat(citrus);
+            document.write("<br><b>Объединенный массив fruits:</b> ");
+            document.write(fruits.join(" "));
+            // массив fruits, в котором после mango вставлены: pear, cherry, plum, raspberry, strawberry
+            // функция ищет номер индекса массива с mango
+            function findmango(fmg) {
+                return fmg == "mango";
+            }
+            // добавляем после mango элементы
+            fruits.splice(fruits.findIndex(findmango)+1, 0, "pear", "cherry", "plum", "raspberry", "strawberry");
+            document.write("<br><b>Массив fruits, в котором после mango вставлены: pear, cherry, plum, raspberry, strawberry:</b> ");
+            document.write(fruits.join(" "));
+            // массив fruits, в котором удалены последние 3 элемента
+            fruits.splice(fruits.length-3, 3);
+            document.write("<br><b>Массив fruits, в котором удалены последние 3 элемента:</b> ");
+            document.write(fruits.join(" "));
+            // отсортированный в алфавитном порядке массив fruits
+            fruits.sort();
+            document.write("<br><b>Отсортированный в алфавитном порядке массив fruits:</b> ");
+            document.write(fruits.join(" "));
+            // массив fruits в обратном алфавитном порядке
+            fruits.reverse();
+            document.write("<br><b>Массив fruits в обратном алфавитном порядке:</b> ");
+            document.write(fruits.join(" "));
+            // массив fruits, отсортированный по длине слов
+            fruits.sort(function(a, b){
+                return b.length - a.length;
+            });
+            document.write("<br><b>Массив fruits, отсортированный по длине слов:</b> ");
+            document.write(fruits.join(" "));
+        }
+    </script>
+    </body>
+</main>
+</html>
