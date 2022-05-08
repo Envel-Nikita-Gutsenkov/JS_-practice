@@ -185,8 +185,8 @@
     <button onclick="myFunction5()">Выполнить</button>
     <script>
         function myFunction5() {
-            fruits=["apple","pineapple","mango","melon","grape"];
-            citrus=["orange","lemon","lime"];
+            fruits = ["apple", "pineapple", "mango", "melon", "grape"];
+            citrus = ["orange", "lemon", "lime"];
             document.write("Гуценков Никита");
             // массив fruits
             document.write("<br><b>Массив fruits:</b> ");
@@ -203,12 +203,13 @@
             function findmango(fmg) {
                 return fmg == "mango";
             }
+
             // добавляем после mango элементы
-            fruits.splice(fruits.findIndex(findmango)+1, 0, "pear", "cherry", "plum", "raspberry", "strawberry");
+            fruits.splice(fruits.findIndex(findmango) + 1, 0, "pear", "cherry", "plum", "raspberry", "strawberry");
             document.write("<br><b>Массив fruits, в котором после mango вставлены: pear, cherry, plum, raspberry, strawberry:</b> ");
             document.write(fruits.join(" "));
             // массив fruits, в котором удалены последние 3 элемента
-            fruits.splice(fruits.length-3, 3);
+            fruits.splice(fruits.length - 3, 3);
             document.write("<br><b>Массив fruits, в котором удалены последние 3 элемента:</b> ");
             document.write(fruits.join(" "));
             // отсортированный в алфавитном порядке массив fruits
@@ -220,7 +221,7 @@
             document.write("<br><b>Массив fruits в обратном алфавитном порядке:</b> ");
             document.write(fruits.join(" "));
             // массив fruits, отсортированный по длине слов
-            fruits.sort(function(a, b){
+            fruits.sort(function (a, b) {
                 return b.length - a.length;
             });
             document.write("<br><b>Массив fruits, отсортированный по длине слов:</b> ");
