@@ -50,10 +50,13 @@
 
     <p>Создать динамическую форму с изменяемым количеством полей</p>
     <script>
+        let countBox;
+
+        // формирует вывод при нажатии на кнопку выполнить
         function myFunction1() {
             let inf = "";
 
-            myWin = open("", "displayWindow", "width=400,height=200,status=no,toolbar=no,menubar=no")
+            const myWin = open("", "displayWindow", "width=400,height=200,status=no,toolbar=no,menubar=no")
 
             myWin.document.open() // открыть объект document для последующей печати
             // генерировать новый документ
@@ -76,10 +79,21 @@
             myWin.document.write("</body></html>")
 
             myWin.document.close()
+
         }
 
+        // отвечает за добавление пожелания к заказу
         function addpref(el) {
             document.getElementById('addpref').style.display = el.value == 'yes' ? '' : 'none';
+        }
+
+        // отвечает за добавление полей с адресом
+        countBox = 1;
+
+        function addInput() {
+            let boxName = "youraddr" + countBox;
+            document.getElementById('responce').innerHTML += '<p><input type="text" id="' + boxName + 'value=""  /><br/>';
+            countBox += 1;
         }
     </script>
 
@@ -88,14 +102,16 @@
         <p><strong>Имя:</strong> <input type=text maxlength=20 name="yourname">
 
         <p><strong>Адрес:</strong> <input type=text maxlength=20 name="youraddr">
+            <input type="button" value="Добавить еще адрес" onclick="addInput()"/>
+            <span id="responce"></span>
 
         <p><strong>Телефон:</strong> <input type=text maxlength=20 name="yourphone">
         <p>
 
         <div class="prefer">
-            <p><strong>Добавить пожелания к заказу:</strong><input type="radio" name="yourpref" id="pref" value="no"
+            <p><strong>Добавить пожелания к заказу:</strong><input type="radio" name="yourpref" value="no"
                                                                    onchange="addpref(this)" checked/><b>Нет</b>
-                <input type="radio" name="yourpref" id="pref" value="yes" onchange="addpref(this)"/><b>Да</b>
+                <input type="radio" name="yourpref" value="yes" onchange="addpref(this)"/><b>Да</b>
         </div>
         <div id="addpref" style="display: none;">
             <textarea name="textyourpref"></textarea>
