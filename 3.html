@@ -11,22 +11,164 @@
     h1 {
         text-align: center;
     }
+
+    .container {
+        width: 150px;
+        height: 150px;
+        position: relative;
+        margin: 30px;
+    }
+
+    .box1 {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0.7;
+        background: #0057e3;
+    }
+
+    .box2 {
+        z-index: 9;
+        margin: 40px;
+        background: #009938;
+    }
+
+    .box3 {
+        z-index: 9;
+        margin: 80px;
+        background: #99002b;
+    }
 </Style>
 <main>
     <body style="background-color:#d3d3d3;">
     <h1>Лабораторная работа №3</h1>
     <h2>Гуценков Никита. Вариант 7</h2>
+
     <h2>Задание 1</h2>
 
-    <p>Текст</p>
-    <img src="./img/4.png"><br>
-
-    <button onclick="myFunction1()">Выполнить</button>
+    <p>Создать динамическую форму с изменяемым количеством полей</p>
     <script>
         function myFunction1() {
+            let inf = "";
 
+            myWin = open("", "displayWindow", "width=400,height=200,status=no,toolbar=no,menubar=no")
+
+            myWin.document.open() // открыть объект document для последующей печати
+            // генерировать новый документ
+            myWin.document.write("<html><head><title>Динамическое создание HTML-документа</title>")
+
+            myWin.document.write("<META HTTP-EQUIV='Content-Type' CONTENT='text/html;")
+
+            myWin.document.write("charset=windows-1251'></head><body>")
+
+            inf = inf + "<ul><li><b>Имя:</b> " + document.myform.yourname.value;
+
+            inf = inf + "<p><li><b>Адрес:</b> " + document.myform.youraddr.value;
+
+            inf = inf + "<p><li><b>Телефон:</b> " + document.myform.yourphone.value;
+
+            inf = inf + "<p><li><b>Пожелания к заказу:</b> " + document.myform.textyourpref.value + "</ul>";
+
+            myWin.document.write(inf);
+
+            myWin.document.write("</body></html>")
+
+            myWin.document.close()
+        }
+
+        function addpref(el) {
+            document.getElementById('addpref').style.display = el.value == 'yes' ? '' : 'none';
         }
     </script>
+
+    <form name="myform">
+
+        <p><strong>Имя:</strong> <input type=text maxlength=20 name="yourname">
+
+        <p><strong>Адрес:</strong> <input type=text maxlength=20 name="youraddr">
+
+        <p><strong>Телефон:</strong> <input type=text maxlength=20 name="yourphone">
+        <p>
+
+        <div class="prefer">
+            <p><strong>Добавить пожелания к заказу:</strong><input type="radio" name="yourpref" id="pref" value="no"
+                                                                   onchange="addpref(this)" checked/><b>Нет</b>
+                <input type="radio" name="yourpref" id="pref" value="yes" onchange="addpref(this)"/><b>Да</b>
+        </div>
+        <div id="addpref" style="display: none;">
+            <textarea name="textyourpref"></textarea>
+        </div>
+
+        <br>
+        <input type=button value="Выполнить" onclick="myFunction1()">
+
+    </form>
+
+    <h2>Задание 2</h2>
+
+    <p>Написать сценарий, который позволяет менять фоновое изображение документа</p>
+
+    <div>
+        <button id="btn-1">Вариант 1</button>
+        <button id="btn-2">Вариант 2</button>
+        <button id="btn-3">Вариант 3</button>
+        <button id="btn-4">Вариант 4</button>
+    </div>
+    <script>
+        let btn1 = document.querySelector('#btn-1');
+        let btn2 = document.querySelector('#btn-2');
+        let btn3 = document.querySelector('#btn-3');
+        let btn4 = document.querySelector('#btn-4');
+        btn1.addEventListener('click', () => {
+            document.body.style.backgroundImage = "url('img/d1.jpg')";
+        });
+        btn2.addEventListener('click', () => {
+            document.body.style.backgroundImage = "url('img/d2.jpg')";
+        });
+        btn3.addEventListener('click', () => {
+            document.body.style.backgroundImage = "url('img/1.png')";
+        });
+        btn4.addEventListener('click', () => {
+            document.body.style.backgroundImage = "url('img/3.png')";
+        });
+    </script>
+
+    <h2>Задание 3</h2>
+
+    <p>Создать HTML-документ, в котором присутствуют три перекрывающихся (но не полностью) блока div с различным цветом
+        фона и разными значениями z-индекса. Написать сценарий, в котором при нажатии на кнопку у блоков будут меняться
+        значения z-индекса</p>
+
+    <button onclick="myFunction3()">Вариант 1</button>
+    <button onclick="myFunction4()">Вариант 2</button>
+    <button onclick="myFunction5()">Вариант 3</button>
+    <script>
+        function myFunction3() {
+            document.getElementById("box1").style.zIndex = "3";
+            document.getElementById("box2").style.zIndex = "2";
+            document.getElementById("box3").style.zIndex = "1";
+        }
+
+        function myFunction4() {
+            document.getElementById("box1").style.zIndex = "2";
+            document.getElementById("box2").style.zIndex = "3";
+            document.getElementById("box3").style.zIndex = "1";
+        }
+
+        function myFunction5() {
+            document.getElementById("box1").style.zIndex = "1";
+            document.getElementById("box2").style.zIndex = "2";
+            document.getElementById("box3").style.zIndex = "3";
+        }
+    </script>
+    <div class="container">
+        <div id="box1" class="box1"></div>
+        <div id="box2" class="box1 box2"></div>
+        <div id="box3" class="box1 box2 box3"></div>
+    </div>
+
     </body>
 </main>
 </html>
