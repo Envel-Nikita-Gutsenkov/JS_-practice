@@ -11,6 +11,31 @@
     h1 {
         text-align: center;
     }
+
+    form {
+        display: table;
+    }
+
+    .p1 {
+        display: table-row;
+    }
+
+    .label1 {
+        display: table-cell;
+    }
+
+    input {
+        display: table-cell;
+    }
+
+    table, th, td {
+        border: 1px solid black;
+    }
+
+    .c1 {
+        display: inline-block;
+        text-align: center;
+    }
 </Style>
 <main>
     <body style="background-color:#d3d3d3;">
@@ -26,7 +51,7 @@
     <script>
         function myFunction1() {
             let text = prompt("Введите текст");
-            let count = (text.match(/\+-/g) || []).length;
+            let count = (text.match(/\+-/g)).length;
             let result = text.replace(/\*/g, "\\-");
 
             alert("Символов +-: \n" + count + "\nТекст с замененными * на \\-: \n" + result);
@@ -41,7 +66,13 @@
     <button onclick="myFunction2()">Выполнить</button>
     <script>
         function myFunction2() {
+            let text = prompt("Введите текст");
+            // длина второго слова
+            let count = text.split(' ').slice(1, 2).join('');
+            // все слова в кавычки
+            let result = text.replace(/([A-Za-zа-яА-Я0-9]+)/g, '"$1"');
 
+            alert("Букв во втором слове: \n" + count.length + "\nТекст с каждым словом в кавычках: \n" + result);
         }
     </script>
 
@@ -53,7 +84,23 @@
     <button onclick="myFunction3()">Выполнить</button>
     <script>
         function myFunction3() {
-
+            let text = prompt("Введите текст");
+            var result = '';
+            var charcode = 0;
+            // перебираем каждую букву
+            for (var i = 0; i < text.length; i++) {
+                // пробел оставить пробелом
+                if (text[i] !== " ") {
+                    // "я" сменить на "а"
+                    if (text[i] !== "я") {
+                        // в остальных случаях поднять на 1 позицию в юникоде
+                        charcode = (text[i].charCodeAt()) + 1;
+                        // из юникода в букву и добавить в строку результата
+                        result += String.fromCharCode(charcode);
+                    } else result += "а";
+                } else result += " ";
+            }
+            alert(result);
         }
     </script>
 
@@ -65,7 +112,17 @@
     <button onclick="myFunction4()">Выполнить</button>
     <script>
         function myFunction4() {
+            let word = prompt("Введите текст");
+            let shuffledWord = '';
+            let vd = word;
+            let result;
+            word = word.split('');
+            while (word.length > 0) {
+                shuffledWord += word.splice(word.length * Math.random() << 0, 1);
+            }
+            result = vd[0] + shuffledWord.substr(1, shuffledWord.length - 2) + vd[vd.length - 1];
 
+            alert(result);
         }
     </script>
 
@@ -84,12 +141,65 @@
         При создании формы установите значения по умолчанию как в образце:</p>
     <img src="./img/8.png"><br>
 
-    <button onclick="myFunction5()">Выполнить</button>
     <script>
         function myFunction5() {
-
+            var total = 0;
+            var count = 0;
+            var values = document.getElementsByClassName("value");
+            // записываем значения в массив
+            for (var i = 0; i < values.length; i++) {
+                var num = parseFloat(values[i].value);
+                // проверка введенного значения
+                if (!isNaN(num)) {
+                    // подсчет
+                    total += num;
+                    count++;
+                }
+            }
+            var totaltb = document.getElementById("total");
+            totaltb.value = count ? total / count : "NaN";
         }
     </script>
+
+    <h4>Введите начисленную зарплату за следующие месяцы</h4>
+    <form name="form1">
+        <p class="p1">
+            <label class="label1">Январь: </label>
+            <input class="value" value="300" maxlength=8 size="6" style="font-weight: bold;" type="text">
+        </p>
+        <br>
+        <p class="p1">
+            <label class="label1">Февраль: </label>
+            <input class="value" value="200" maxlength=8 size="6" style="font-weight: bold;" type="text">
+        </p>
+        <br>
+        <p class="p1">
+            <label class="label1">Март: </label>
+            <input class="value" value="500" maxlength=8 size="6" style="font-weight: bold;" type="text">
+        </p>
+        <br>
+        <p class="p1">
+            <label class="label1">Апрель: </label>
+            <input class="value" value="250" maxlength=8 size="6" style="font-weight: bold;" type="text">
+        </p>
+        <br>
+        <p class="p1">
+            <label class="label1">Май: </label>
+            <input class="value" value="350" maxlength=8 size="6" style="font-weight: bold;" type="text">
+        </p>
+        <br>
+        <p class="p1">
+            <label class="label1">Июнь: </label>
+            <input class="value" value="500" maxlength=8 size="6" style="font-weight: bold;" type="text">
+        </p>
+        <br></form>
+    <p>
+        <label><b>Средняя зарплата:</b></label>
+        <input id="total" size="16" style="font-weight: bold;" type="text" readonly>
+    </p>
+    <br>
+    <input type=button value="Вычислить" onclick="myFunction5()">&nbsp;<input type=reset value="Обновить">
+
 
     <h2>Задание 6</h2>
 
@@ -106,12 +216,47 @@
         одной ячейки шириной и высотой 100 пикселов. В ячейку таблицы следует поместить слово «Текст» </p>
     <img src="./img/9.png"><br>
 
-    <button onclick="myFunction6()">Выполнить</button>
     <script>
         function myFunction6() {
 
         }
     </script>
+    <div class="c1">
+        <table style="width:200px; height:200px">
+            <tr>
+                <th>Текст</th>
+            </tr>
+        </table>
+        <form action="/action_page.php">
+            <h4>Выбирите горизональное расположение</h4>
+            <p>
+                <input type="radio" name="hor" value="1" checked>
+                <label> Слева</label><br>
+            </p>
+            <p>
+                <input type="radio" name="hor" value="2">
+                <label> По центру</label><br>
+            </p>
+            <p>
+                <input type="radio" name="hor" value="3">
+                <label> Справа</label><br><br>
+            </p>
+            <h4>Выбирите вертикальное расположение</h4>
+            <p>
+                <input type="checkbox" name="ver" value="4" checked>
+                <label> Сверху</label><br>
+            </p>
+            <p>
+                <input type="checkbox" name="ver" value="5">
+                <label> Посередине</label><br>
+            </p>
+            <p>
+                <input type="checkbox" name="ver" value="6">
+                <label> Внизу</label><br><br>
+            </p>
+            <input type="submit" value="Выполнить">
+        </form>
+    </div>
 
     </body>
 </main>
