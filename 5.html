@@ -95,7 +95,7 @@
 
     <button onclick="myFunction3()">Выполнить</button>
     <script>
-        /* Результаты теста.
+        /* Результаты теста. text1 - ответы, text3 - вопросы.
            Это не правильный вариант хранения данных теста,
            так как можно подсмотреть, только для демонстрации */
         results = {
@@ -110,30 +110,6 @@
                 "3",
                 "4",
                 "1"
-            ],
-            text2: [
-                "gg 1 data",
-                "gg 2 data",
-                "gg 3 data",
-                "gg 4 data",
-                "gg 5 data",
-                "gg 6 data",
-                "gg 7 data",
-                "gg 8 data",
-                "gg 9 data",
-                "gg 10 data"
-            ],
-            text2: [
-                "",
-                "gg 2 data",
-                "gg 3 data",
-                "gg 4 data",
-                "gg 5 data",
-                "gg 6 data",
-                "gg 7 data",
-                "gg 8 data",
-                "gg 9 data",
-                "gg 10 data"
             ],
             text3: [
                 "Тут написан текст вопроса 1",
@@ -169,34 +145,51 @@
             // 3.Циклически задать не менее 10 вопросов с 4 вариантами ответов (через диалоговое окно).
             var testarr = [];
             // считаем время на каждый ответ, это количество миллисекунд с 1 января 1970
-            let d = new Date();
-            let time = d.getTime();
-            //TODO удалить let minute = Math.round((d.getTime()-"1652446713862") / 1000);
+            let d, time;
             let timings = [];
+            let stimings = [];
 
             for (var i = 1; i <= 10; i++) {
+                // текущее время нужно получать каждый раз перед запросом
+                d = new Date();
+                time = d.getTime();
                 // пишем время начала демонстрации каждого вопроса
-                timings[i-1] = time;
-                testarr[i - 1] = prompt("Вопрос 1:\r" + results.text3[i - 1] + "\r1. Да \r2. Нет \r3. Не знаю \r4. Другое");
+                timings[i - 1] = time;
+                testarr[i - 1] = prompt("Вопрос "+ i +":\r"+ results.text3[i - 1] + "\r1. Да \r2. Нет \r3. Не знаю \r4. Другое");
             }
+            // пишем время ответа на последний вопрос
+            d = new Date();
+            time = d.getTime();
+            timings[10] = time;
+            // получено 11 временных меток (0-10), пересчитываем в секундах на 10 вопросов
+            for (var i = 0; i < 10; i++) {
+                stimings[i] = Math.round((timings[i + 1] - timings[i]) / 1000);
+            }
+
             document.writeln("<H1>ТЕСТ</H1>");
             document.writeln("<H3>ФИО: " + x + "</H3>");
             document.writeln("<H3>Возраст: " + y + "</H3>");
             document.writeln("<H3>Пол: " + z + "</H3>");
             // генерируем таблицу, передав ответы пользователя 
-            generate_table(testarr);
+            generate_table(testarr, stimings);
 
-            document.writeln("<H3>1.Список вопросов с правильным ответом " + x + "</H3>");
-            document.writeln("<H3>2.Список вопросов с неверным ответом " + x + "</H3>");
-            document.writeln("<H3>3.Вопрос, на который было затрачено более всего времени " + x + "</H3>");
-            document.writeln("<H3>4.Среднее время ответа на вопрос " + x + "</H3>");
-            document.writeln("<H3>5.Процент правильных ответов " + x + "</H3>");
-            document.writeln("<H3>6.Процент неправильных ответов " + x + "</H3>");
-            document.writeln("<H3>7.Вопросы, на которые было затрачено времени более порогового значения " + x + "</H3>");
+            // подготовим ответы на вопросы
+            let a1,a2,a3,a4,a5,a6,a7;
+            for (i=0;i<10;i++){
+                //TODO 
+            }
+            a3=stimings.indexOf(Math.max.apply(null, stimings))+1;
+
+            document.writeln("<H3>1.Список вопросов с правильным ответом " + a1 + "</H3>");
+            document.writeln("<H3>2.Список вопросов с неверным ответом " + a2 + "</H3>");
+            document.writeln("<H3>3.Вопрос, на который было затрачено более всего времени " + a3 + "</H3>");
+            document.writeln("<H3>4.Среднее время ответа на вопрос " + a4 + "</H3>");
+            document.writeln("<H3>5.Процент правильных ответов " + a5 + "</H3>");
+            document.writeln("<H3>6.Процент неправильных ответов " + a6 + "</H3>");
+            document.writeln("<H3>7.Вопросы, на которые было затрачено времени более порогового значения " + a7 + "</H3>");
         }
 
-        function generate_table(testarr) {
-            // get the reference for the body
+        function generate_table(testarr, stimings) {
             var body = document.getElementsByTagName("body")[0];
 
             // создаем элементы <table> и <tbody>
@@ -244,9 +237,8 @@
                             cellText = document.createTextNode(testarr[i]);
                             break;
                         case 4:
-                            cellText = document.createTextNode(results.text2[i]);
+                            cellText = document.createTextNode(stimings[i]);
                             break;
-
                     }
                     cell.appendChild(cellText);
                     row.appendChild(cell);
@@ -260,7 +252,6 @@
             body.appendChild(tbl);
             // графика таблицы
             tbl.setAttribute("border", "2");
-
         }
     </script>
     </body>
