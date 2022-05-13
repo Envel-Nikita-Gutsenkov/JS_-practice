@@ -30,6 +30,8 @@
 
     table, th, td {
         border: 1px solid black;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .c1 {
@@ -114,8 +116,7 @@
         function myFunction4() {
             let word = prompt("Введите текст");
             let shuffledWord = '';
-            let vd = word;
-            let result;
+            let vd = word, result;
             word = word.split('');
             while (word.length > 0) {
                 shuffledWord += word.splice(word.length * Math.random() << 0, 1);
@@ -142,10 +143,10 @@
     <img src="./img/8.png"><br>
 
     <script>
-        function myFunction5() {
+        function myFunction5(form) {
             var total = 0;
             var count = 0;
-            var values = document.getElementsByClassName("value");
+            var values = form.getElementsByClassName("value");
             // записываем значения в массив
             for (var i = 0; i < values.length; i++) {
                 var num = parseFloat(values[i].value);
@@ -198,7 +199,7 @@
         <input id="total" size="16" style="font-weight: bold;" type="text" readonly>
     </p>
     <br>
-    <input type=button value="Вычислить" onclick="myFunction5()">&nbsp;<input type=reset value="Обновить">
+    <input type=button value="Вычислить" onclick="myFunction5(form1)">&nbsp;<input type=reset value="Обновить">
 
 
     <h2>Задание 6</h2>
@@ -219,42 +220,68 @@
     <script>
         function myFunction6() {
 
+            // получаем значения вертикальной и горизонтальной позиции
+            var hor = document.getElementsByName('hor');
+            var ver = document.getElementsByName('ver'), i;
+
+            for (i = 0; i < hor.length; i++) {
+                if (hor[i].checked)
+                    // установка горизонтальной позиции
+                    document.getElementById("text").style.textAlign = hor[i].value;
+            }
+            for (i = 0; i < ver.length; i++) {
+                if (ver[i].checked)
+                    // установка вертикальной позиции
+                    document.getElementById("text").style.verticalAlign = ver[i].value;
+            }
+        }
+
+        /* В задании почему-то требуется использовать checkbox вместо radio в вертикальном расположении.
+           Это как если бы стояла задача выпить чай вилкой, так как checkbox не позволяет выбрать
+           только 1 вариант. Поэтому нужен скрипт, который исправляет "вилку" для того, чтобы
+           ей можно было "выпить чай" */
+        function selectOnlyThis(id) {
+            var ver = document.getElementsByName("ver");
+            Array.prototype.forEach.call(ver, function (el) {
+                el.checked = false;
+            });
+            id.checked = true;
         }
     </script>
     <div class="c1">
         <table style="width:200px; height:200px">
             <tr>
-                <th>Текст</th>
+                <th id="text">Текст</th>
             </tr>
         </table>
         <form action="/action_page.php">
             <h4>Выбирите горизональное расположение</h4>
             <p>
-                <input type="radio" name="hor" value="1" checked>
-                <label> Слева</label><br>
+                <input type="radio" id="left" name="hor" value="left" checked>
+                <label for="left"> Слева</label><br>
             </p>
             <p>
-                <input type="radio" name="hor" value="2">
-                <label> По центру</label><br>
+                <input type="radio" id="center" name="hor" value="center">
+                <label for="center"> По центру</label><br>
             </p>
             <p>
-                <input type="radio" name="hor" value="3">
-                <label> Справа</label><br><br>
+                <input type="radio" id="right" name="hor" value="right">
+                <label for="right"> Справа</label><br><br>
             </p>
             <h4>Выбирите вертикальное расположение</h4>
             <p>
-                <input type="checkbox" name="ver" value="4" checked>
-                <label> Сверху</label><br>
+                <input type="checkbox" id="top" name="ver" value="top" onclick="selectOnlyThis(this)" checked>
+                <label for="top"> Сверху</label><br>
             </p>
             <p>
-                <input type="checkbox" name="ver" value="5">
-                <label> Посередине</label><br>
+                <input type="checkbox" id="middle" name="ver" value="middle" onclick="selectOnlyThis(this)">
+                <label for="middle"> Посередине</label><br>
             </p>
             <p>
-                <input type="checkbox" name="ver" value="6">
-                <label> Внизу</label><br><br>
+                <input type="checkbox" id="bottom" name="ver" value="bottom" onclick="selectOnlyThis(this)">
+                <label for="bottom"> Внизу</label><br><br>
             </p>
-            <input type="submit" value="Выполнить">
+            <input type="button" value="Выполнить" onclick="myFunction6()">
         </form>
     </div>
 

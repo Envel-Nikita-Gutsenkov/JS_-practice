@@ -16,14 +16,242 @@
     <body style="background-color:#d3d3d3;">
     <h1>Лабораторная работа №5</h1>
     <h2>Гуценков Никита. Вариант 7</h2>
-    <h2>Задание 1</h2>
+    <h2>Задание 1 (ничем не отличается от ЛР1)</h2>
 
-    <p>Текст</p>
-    <img src="./img/4.png"><br>
+    <p>В соответствии с вариантом написать JavaScript для вычисления значения функции. Ввод/вывод исходных данных
+        осуществляется через диалоговые окна.</p>
+    <img src="./img/10.png"><br>
 
     <button onclick="myFunction1()">Выполнить</button>
     <script>
         function myFunction1() {
+            // введем x y z
+            let x = prompt("Введите x");
+            let y = prompt("Введите y");
+            let z = prompt("Введите z");
+            // подсчет и ответ
+            let b = Math.abs(x - y) * (Math.pow(Math.sin(z), 2) + Math.tan(z));
+            // вывод ответа
+            alert("Ответ " + b);
+        }
+    </script>
+
+    <h2>Задание 2</h2>
+
+    <p>Переработать скрипт разработанный в задании 1 для вывода исходных данных и результатов в динамически
+        сформированный HTML документ. При динамическом формировании HTML документа обязательно использовать теги.
+        Результаты оформить презентабельно.</p>
+
+    <button onclick="myFunction2()">Выполнить</button>
+    <script>
+        function myFunction2() {
+            // введем x y z
+            let x = prompt("Введите x");
+            let y = prompt("Введите y");
+            let z = prompt("Введите z");
+            // подсчет и ответ
+            let b = Math.abs(x - y) * (Math.pow(Math.sin(z), 2) + Math.tan(z));
+            // вывод ответа
+            document.writeln("<H2>Гуценков Никита. Вариант 7</H2>")
+            document.writeln("<H3>X: " + x + "</H3>")
+            document.writeln("<H3>Y: " + y + "</H3>")
+            document.writeln("<H3>Z: " + z + "</H3>")
+            document.writeln("<H1>Ответ: " + b + "</H1>")
+        }
+    </script>
+
+    <h2>Задание 3</h2>
+
+    <p>Разработать скрипт для проведения тестирования. Скрипт должен реализовывать следующую последовательность
+        действий:
+        <br>
+        1.Задать вопрос о желании пройти тест (через диалоговое окно);
+        <br>
+        2.В случае согласия необходимо ввести следующие данные: ФИО, возраст, пол.
+        <br>
+        3.Циклически задать не менее 10 вопросов с 4 вариантами ответов (через диалоговое окно). Результаты ответов
+        вводятся либо числом 1-4, либо буквой A-D.
+        <br>
+        4.По окончанию опроса сформировать HTML документ следующего содержания: заголовок – название теста, ФИО,
+        возраст, пол тестируемого, результаты тестов виде таблицы заданного вида, правильные и неправильные ответы
+        оформить по разному (фон, цвет, форматирование).
+        <br>
+        5.Так же должны быть получены ответы на следующие вопросы:
+        <br>
+        &nbsp;&nbsp;1.Список вопросов с правильным ответом;
+        <br>
+        &nbsp;&nbsp;2.Список вопросов с неверным ответом;
+        <br>
+        &nbsp;&nbsp;3.Вопрос, на который было затрачено более всего времени;
+        <br>
+        &nbsp;&nbsp;4.Среднее время ответа на вопрос;
+        <br>
+        &nbsp;&nbsp;5.Процент правильных ответов;
+        <br>
+        &nbsp;&nbsp;6.Процент неправильных ответов;
+        <br>
+        &nbsp;&nbsp;7.Вопросы, на которые было затрачено времени более порогового значения.</p>
+    <img src="./img/11.png"><br>
+
+    <button onclick="myFunction3()">Выполнить</button>
+    <script>
+        /* Результаты теста.
+           Это не правильный вариант хранения данных теста,
+           так как можно подсмотреть, только для демонстрации */
+        results = {
+            text1: [
+                "1",
+                "4",
+                "3",
+                "4",
+                "1",
+                "2",
+                "2",
+                "3",
+                "4",
+                "1"
+            ],
+            text2: [
+                "gg 1 data",
+                "gg 2 data",
+                "gg 3 data",
+                "gg 4 data",
+                "gg 5 data",
+                "gg 6 data",
+                "gg 7 data",
+                "gg 8 data",
+                "gg 9 data",
+                "gg 10 data"
+            ],
+            text2: [
+                "",
+                "gg 2 data",
+                "gg 3 data",
+                "gg 4 data",
+                "gg 5 data",
+                "gg 6 data",
+                "gg 7 data",
+                "gg 8 data",
+                "gg 9 data",
+                "gg 10 data"
+            ],
+            text3: [
+                "Тут написан текст вопроса 1",
+                "Тут написан текст вопроса 2",
+                "Тут написан текст вопроса 3",
+                "Тут написан текст вопроса 4",
+                "Тут написан текст вопроса 5",
+                "Тут написан текст вопроса 6",
+                "Тут написан текст вопроса 7",
+                "Тут написан текст вопроса 8",
+                "Тут написан текст вопроса 9",
+                "Тут написан текст вопроса 10"
+            ]
+        }
+
+        // 1.Задать вопрос о желании пройти тест (через диалоговое окно);
+        function myFunction3() {
+            var retVal = confirm("Вопрос о желании пройти тест");
+            if (retVal == true) {
+                myFunction4();
+                return true;
+            } else {
+                alert("ОТМЕНЕНО");
+                return false;
+            }
+        }
+
+        function myFunction4() {
+            // 2.В случае согласия необходимо ввести следующие данные: ФИО, возраст, пол.
+            let x = prompt("Введите ФИО");
+            let y = prompt("Введите возраст");
+            let z = prompt("Введите пол");
+            // 3.Циклически задать не менее 10 вопросов с 4 вариантами ответов (через диалоговое окно).
+            var testarr = [];
+            for (var i = 1; i <= 10; i++) {
+                testarr[i - 1] = prompt("Вопрос 1:\r" + results.text3[i - 1] + "\r1. Да \r2. Нет \r3. Не знаю \r4. Другое");
+            }
+            document.writeln("<H1>ТЕСТ</H1>");
+            document.writeln("<H3>ФИО: " + x + "</H3>");
+            document.writeln("<H3>Возраст: " + y + "</H3>");
+            document.writeln("<H3>Пол: " + z + "</H3>");
+            // генерируем таблицу, передав ответы пользователя 
+            generate_table(testarr);
+
+            document.writeln("<H3>1.Список вопросов с правильным ответом " + x + "</H3>");
+            document.writeln("<H3>2.Список вопросов с неверным ответом " + x + "</H3>");
+            document.writeln("<H3>3.Вопрос, на который было затрачено более всего времени " + x + "</H3>");
+            document.writeln("<H3>4.Среднее время ответа на вопрос " + x + "</H3>");
+            document.writeln("<H3>5.Процент правильных ответов " + x + "</H3>");
+            document.writeln("<H3>6.Процент неправильных ответов " + x + "</H3>");
+            document.writeln("<H3>7.Вопросы, на которые было затрачено времени более порогового значения " + x + "</H3>");
+        }
+
+        function generate_table(testarr) {
+            // get the reference for the body
+            var body = document.getElementsByTagName("body")[0];
+
+            // создаем элементы <table> и <tbody>
+            var tbl = document.createElement("table");
+            var header = document.createElement('thead')
+            var headingRow = document.createElement('tr')
+            var headingCell = [];
+            var headingText = [];
+            var cellText;
+            // заполняем заголовок
+            headingText[1] = document.createTextNode('N')
+            headingText[2] = document.createTextNode('Вопрос')
+            headingText[3] = document.createTextNode('Правильный ответ')
+            headingText[4] = document.createTextNode('Ответ пользователя')
+            headingText[5] = document.createTextNode('Время ответа')
+
+            // подготовка текста в ячейках
+            for (var i = 1; i <= 5; i++) {
+                headingCell[i] = document.createElement('td');
+                headingCell[i].appendChild(headingText[i]);
+                headingRow.appendChild(headingCell[i]);
+            }
+            header.appendChild(headingRow)
+            tbl.appendChild(header)
+            var tblBody = document.createElement("tbody");
+
+            // создание таблицы
+            for (var i = 0; i < 10; i++) {
+                var row = document.createElement("tr");
+
+                for (var j = 0; j < 5; j++) {
+                    // Создание <td> и запись текста
+                    var cell = document.createElement("td");
+                    switch (j) {
+                        case 0:
+                            cellText = document.createTextNode(i + 1);
+                            break;
+                        case 1:
+                            cellText = document.createTextNode(results.text3[i]);
+                            break;
+                        case 2:
+                            cellText = document.createTextNode(results.text1[i]);
+                            break;
+                        case 3:
+                            cellText = document.createTextNode(testarr[i]);
+                            break;
+                        case 4:
+                            cellText = document.createTextNode(results.text2[i]);
+                            break;
+
+                    }
+                    cell.appendChild(cellText);
+                    row.appendChild(cell);
+                }
+                tblBody.appendChild(row);
+            }
+            tbl.style.borderCollapse = "collapse";
+            // вставка <tbody> в <table>
+            tbl.appendChild(tblBody);
+            // применение <table> в <body>
+            body.appendChild(tbl);
+            // графика таблицы
+            tbl.setAttribute("border", "2");
 
         }
     </script>
