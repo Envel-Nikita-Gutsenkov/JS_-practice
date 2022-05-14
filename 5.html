@@ -154,7 +154,7 @@
                 time = d.getTime();
                 // пишем время начала демонстрации каждого вопроса
                 timings[i - 1] = time;
-                testarr[i - 1] = prompt("Вопрос "+ i +":\r"+ results.text3[i - 1] + "\r1. Да \r2. Нет \r3. Не знаю \r4. Другое");
+                testarr[i - 1] = prompt("Вопрос " + i + ":\r" + results.text3[i - 1] + "\r1. Да \r2. Нет \r3. Не знаю \r4. Другое");
             }
             // пишем время ответа на последний вопрос
             d = new Date();
@@ -173,21 +173,21 @@
             generate_table(testarr, stimings);
 
             // подготовим ответы на вопросы
-            let a1 = [],a2 = [],a3,a4,a5,a6,a7 = [];
+            let a1 = [], a2 = [], a3, a4, a5, a6, a7 = [];
             // 1
-            for (i=0;i<10;i++){
-                if(results.text1[i]===testarr[i]){
-                    a1.push(i+1);
+            for (i = 0; i < 10; i++) {
+                if (results.text1[i] === testarr[i]) {
+                    a1.push(i + 1);
                 }
             }
             // 2
-            for (i=0;i<10;i++){
-                if(results.text1[i]!==testarr[i]){
-                    a2.push(i+1);
+            for (i = 0; i < 10; i++) {
+                if (results.text1[i] !== testarr[i]) {
+                    a2.push(i + 1);
                 }
             }
             // 3
-            a3=stimings.indexOf(Math.max.apply(null, stimings))+1;
+            a3 = stimings.indexOf(Math.max.apply(null, stimings)) + 1;
             // 4
             a4 = stimings.reduce((a, b) => a + b) / stimings.length;
             // 5
@@ -195,9 +195,9 @@
             // 6
             a6 = (100 * a2.length) / 10;
             // 7
-            for (i=0;i<10;i++){
-                if(stimings[i]>lim){
-                    a7.push(i+1);
+            for (i = 0; i < 10; i++) {
+                if (stimings[i] > lim) {
+                    a7.push(i + 1);
                 }
             }
 
@@ -237,7 +237,7 @@
             tbl.appendChild(header)
             var tblBody = document.createElement("tbody");
 
-            // создание таблицы
+            // создание таблицы размера 10х5
             for (var i = 0; i < 10; i++) {
                 var row = document.createElement("tr");
 

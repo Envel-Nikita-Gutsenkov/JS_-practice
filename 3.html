@@ -50,7 +50,6 @@
 
     <p>Создать динамическую форму с изменяемым количеством полей</p>
     <script>
-        let countBox;
 
         // формирует вывод при нажатии на кнопку выполнить
         function myFunction1() {
@@ -88,7 +87,7 @@
         }
 
         // отвечает за добавление полей с адресом
-        countBox = 1;
+        let countBox = 1;
 
         function addInput() {
             let boxName = "youraddr" + countBox;
