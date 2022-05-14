@@ -124,6 +124,8 @@
                 "Тут написан текст вопроса 10"
             ]
         }
+        // пороговое значение лимита времени (для пункта 7 отчета после теста) в секундах
+        const lim = "20";
 
         // 1.Задать вопрос о желании пройти тест (через диалоговое окно);
         function myFunction3() {
@@ -143,11 +145,8 @@
             let y = prompt("Введите возраст");
             let z = prompt("Введите пол");
             // 3.Циклически задать не менее 10 вопросов с 4 вариантами ответов (через диалоговое окно).
-            var testarr = [];
             // считаем время на каждый ответ, это количество миллисекунд с 1 января 1970
-            let d, time;
-            let timings = [];
-            let stimings = [];
+            let testarr = [], timings = [], stimings = [], d, time;
 
             for (var i = 1; i <= 10; i++) {
                 // текущее время нужно получать каждый раз перед запросом
@@ -174,19 +173,41 @@
             generate_table(testarr, stimings);
 
             // подготовим ответы на вопросы
-            let a1,a2,a3,a4,a5,a6,a7;
+            let a1 = [],a2 = [],a3,a4,a5,a6,a7 = [];
+            // 1
             for (i=0;i<10;i++){
-                //TODO 
+                if(results.text1[i]===testarr[i]){
+                    a1.push(i+1);
+                }
             }
+            // 2
+            for (i=0;i<10;i++){
+                if(results.text1[i]!==testarr[i]){
+                    a2.push(i+1);
+                }
+            }
+            // 3
             a3=stimings.indexOf(Math.max.apply(null, stimings))+1;
+            // 4
+            a4 = stimings.reduce((a, b) => a + b) / stimings.length;
+            // 5
+            a5 = (100 * a1.length) / 10;
+            // 6
+            a6 = (100 * a2.length) / 10;
+            // 7
+            for (i=0;i<10;i++){
+                if(stimings[i]>lim){
+                    a7.push(i+1);
+                }
+            }
 
-            document.writeln("<H3>1.Список вопросов с правильным ответом " + a1 + "</H3>");
-            document.writeln("<H3>2.Список вопросов с неверным ответом " + a2 + "</H3>");
-            document.writeln("<H3>3.Вопрос, на который было затрачено более всего времени " + a3 + "</H3>");
-            document.writeln("<H3>4.Среднее время ответа на вопрос " + a4 + "</H3>");
-            document.writeln("<H3>5.Процент правильных ответов " + a5 + "</H3>");
-            document.writeln("<H3>6.Процент неправильных ответов " + a6 + "</H3>");
-            document.writeln("<H3>7.Вопросы, на которые было затрачено времени более порогового значения " + a7 + "</H3>");
+            document.writeln("<H3>1.Список вопросов с правильным ответом: " + a1 + "</H3>");
+            document.writeln("<H3>2.Список вопросов с неверным ответом: " + a2 + "</H3>");
+            document.writeln("<H3>3.Вопрос, на который было затрачено более всего времени: " + a3 + "</H3>");
+            document.writeln("<H3>4.Среднее время ответа на вопрос: " + a4 + " секунд</H3>");
+            document.writeln("<H3>5.Процент правильных ответов: " + a5 + "</H3>");
+            document.writeln("<H3>6.Процент неправильных ответов: " + a6 + "</H3>");
+            document.writeln("<H3>7.Вопросы, на которые было затрачено времени более порогового значения: " + a7 + "</H3>");
         }
 
         function generate_table(testarr, stimings) {
@@ -204,7 +225,7 @@
             headingText[2] = document.createTextNode('Вопрос')
             headingText[3] = document.createTextNode('Правильный ответ')
             headingText[4] = document.createTextNode('Ответ пользователя')
-            headingText[5] = document.createTextNode('Время ответа')
+            headingText[5] = document.createTextNode('Время ответа, с')
 
             // подготовка текста в ячейках
             for (var i = 1; i <= 5; i++) {
