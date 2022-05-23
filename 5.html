@@ -11,6 +11,24 @@
     h1 {
         text-align: center;
     }
+
+    form {
+        display: table;
+    }
+
+    input {
+        display: table-cell;
+    }
+
+    table, th, td {
+        border: 1px solid black;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .p1 {
+        display: table-row;
+    }
 </Style>
 <main>
     <body style="background-color:#d3d3d3;">
@@ -91,10 +109,38 @@
         &nbsp;&nbsp;6.Процент неправильных ответов;
         <br>
         &nbsp;&nbsp;7.Вопросы, на которые было затрачено времени более порогового значения.</p>
-    <img src="./img/11.png"><br>
+    <img src="./img/11.png"><br><br>
+    <form>
+        <p class="p1">
+            <label class="label1"> ФИО: </label>
+            <input class="value" id="myname" maxlength=80 size="48" style="font-weight: bold;" type="text">
+        </p>
+        <p class="p1">
+            <p>Пол:</p>
+            <input type="radio" id="man" name="pol" value="man">
+            <label for="man">Мужской</label><br>
+            <input type="radio" id="wom" name="pol" value="wom">
+            <label for="wom">Женский</label><br>
+        </p>
+        <p class="p1">
+            <p>Возраст:</p>
+            <select id="age"></select><br><br>
+        </p>
+    </form>
 
     <button onclick="myFunction3()">Выполнить</button>
     <script>
+        // выбор возраста - генерация чисел
+        function createOptions(times) {
+            for (let x = 0; x <= times; x++) {
+                let option = document.createElement('option');
+                option.value = x;
+                option.innerHTML = x;
+                document.getElementById('age').appendChild(option)
+            }
+        }
+        let _age = createOptions(100);
+
         /* Результаты теста. text1 - ответы, text3 - вопросы.
            Это не правильный вариант хранения данных теста,
            так как можно подсмотреть, только для демонстрации */
@@ -141,9 +187,13 @@
 
         function myFunction4() {
             // 2.В случае согласия необходимо ввести следующие данные: ФИО, возраст, пол.
-            let x = prompt("Введите ФИО");
-            let y = prompt("Введите возраст");
-            let z = prompt("Введите пол");
+            let x = document.getElementById("myname").value; // фио
+            let y = document.getElementById("age").value; // возраст
+            let z; // пол
+            if(document.getElementById('man').checked === true)
+                z = "мужской";
+            if(document.getElementById('wom').checked === true)
+                z = "женский";
             // 3.Циклически задать не менее 10 вопросов с 4 вариантами ответов (через диалоговое окно).
             // считаем время на каждый ответ, это количество миллисекунд с 1 января 1970
             let testarr = [], timings = [], stimings = [], d, time;
@@ -256,6 +306,8 @@
                             break;
                         case 3:
                             cellText = document.createTextNode(testarr[i]);
+                            if (testarr[i]==results.text1[i])
+                                cell.style.backgroundColor = "green";
                             break;
                         case 4:
                             cellText = document.createTextNode(stimings[i]);

@@ -49,52 +49,6 @@
     <h2>Задание 1</h2>
 
     <p>Создать динамическую форму с изменяемым количеством полей</p>
-    <script>
-
-        // формирует вывод при нажатии на кнопку выполнить
-        function myFunction1() {
-            let inf = "";
-
-            const myWin = open("", "displayWindow", "width=400,height=200,status=no,toolbar=no,menubar=no")
-
-            myWin.document.open() // открыть объект document для последующей печати
-            // генерировать новый документ
-            myWin.document.write("<html><head><title>Динамическое создание HTML-документа</title>")
-
-            myWin.document.write("<META HTTP-EQUIV='Content-Type' CONTENT='text/html;")
-
-            myWin.document.write("charset=windows-1251'></head><body>")
-
-            inf = inf + "<ul><li><b>Имя:</b> " + document.myform.yourname.value;
-
-            inf = inf + "<p><li><b>Адрес:</b> " + document.myform.youraddr.value;
-
-            inf = inf + "<p><li><b>Телефон:</b> " + document.myform.yourphone.value;
-
-            inf = inf + "<p><li><b>Пожелания к заказу:</b> " + document.myform.textyourpref.value + "</ul>";
-
-            myWin.document.write(inf);
-
-            myWin.document.write("</body></html>")
-
-            myWin.document.close()
-
-        }
-
-        // отвечает за добавление пожелания к заказу
-        function addpref(el) {
-            document.getElementById('addpref').style.display = el.value == 'yes' ? '' : 'none';
-        }
-
-        // отвечает за добавление полей с адресом
-        let countBox = 1;
-
-        function addInput() {
-            let boxName = "youraddr" + countBox;
-            document.getElementById('responce').innerHTML += '<p><input type="text" id="' + boxName + 'value=""  /><br/>';
-            countBox += 1;
-        }
-    </script>
 
     <form name="myform">
 
@@ -120,6 +74,64 @@
         <input type=button value="Выполнить" onclick="myFunction1()">
 
     </form>
+
+    <script>
+        let totaladr=0;
+        // формирует вывод при нажатии на кнопку выполнить
+        function myFunction1() {
+            let inf = "";
+
+            const myWin = open("", "displayWindow", "width=400,height=200,status=no,toolbar=no,menubar=no")
+
+            myWin.document.open() // открыть объект document для последующей печати
+            // генерировать новый документ
+            myWin.document.write("<html><head><title>Динамическое создание HTML-документа</title>")
+
+            myWin.document.write("<META HTTP-EQUIV='Content-Type' CONTENT='text/html;")
+
+            myWin.document.write("charset=windows-1251'></head><body>")
+
+            inf = inf + "<ul><li><b>Имя:</b> " + document.myform.yourname.value;
+            
+            inf = inf + "<p><li><b>Адрес:</b> " + document.myform.youraddr.value;
+
+            for (i=1;i<=totaladr && totaladr!==0;i++) {
+                if ( (document.getElementsByName("youraddr"+i)[0].value)!== 'undefined')
+            inf = inf + "<p><li><b>Адрес</b> "+ i +"<b>:</b> "+ document.getElementsByName("youraddr"+i)[0].value;
+            console.log("OK "+ i );
+            }
+
+            inf = inf + "<p><li><b>Телефон:</b> " + document.myform.yourphone.value;
+
+            inf = inf + "<p><li><b>Пожелания к заказу:</b> " + document.myform.textyourpref.value + "</ul>";
+
+            myWin.document.write(inf);
+
+            myWin.document.write("</body></html>")
+
+            myWin.document.close()
+
+        }
+
+        // отвечает за добавление пожелания к заказу
+        function addpref(el) {
+            document.getElementById('addpref').style.display = el.value == 'yes' ? '' : 'none';
+        }
+
+        // отвечает за добавление полей с адресом
+        function addInput() {
+            let total_text=document.getElementsByClassName("input_text");
+            totaladr++;
+            total_text=total_text.length+1;
+            document.getElementById('responce').innerHTML += "<p id='input_text"+total_text+"_wrapper'><input type='text' class='input_text' name='youraddr"+totaladr+"' id='input_text"+total_text+"'> <input type='button' value='УДАЛИТЬ' onclick=remove_field('input_text"+total_text+"');></p>";
+        }
+        // отвечает за удаление полей с адресом
+        function remove_field(id)
+        {
+          document.getElementById(id+"_wrapper").innerHTML="";
+          totaladr--;
+        }
+    </script>
 
     <h2>Задание 2</h2>
 
