@@ -92,14 +92,16 @@
             myWin.document.write("charset=windows-1251'></head><body>")
 
             inf = inf + "<ul><li><b>Имя:</b> " + document.myform.yourname.value;
-            
+
             inf = inf + "<p><li><b>Адрес:</b> " + document.myform.youraddr.value;
 
-            for (i=1;i<=totaladr && totaladr!==0;i++) {
-                if ( (document.getElementsByName("youraddr"+i)[0].value)!== 'undefined')
-            inf = inf + "<p><li><b>Адрес</b> "+ i +"<b>:</b> "+ document.getElementsByName("youraddr"+i)[0].value;
-            console.log("OK "+ i );
+            // дополнительные поля адреса
+            var inputs=document.getElementsByName("adrname");
+            var adrnamesum="";
+            for (var j=0;j<inputs.length;j++) {
+                adrnamesum+=", "+inputs[j].value;
             }
+            inf = inf +adrnamesum;
 
             inf = inf + "<p><li><b>Телефон:</b> " + document.myform.yourphone.value;
 
@@ -120,16 +122,13 @@
 
         // отвечает за добавление полей с адресом
         function addInput() {
-            let total_text=document.getElementsByClassName("input_text");
             totaladr++;
-            total_text=total_text.length+1;
-            document.getElementById('responce').innerHTML += "<p id='input_text"+total_text+"_wrapper'><input type='text' class='input_text' name='youraddr"+totaladr+"' id='input_text"+total_text+"'> <input type='button' value='УДАЛИТЬ' onclick=remove_field('input_text"+total_text+"');></p>";
+            document.getElementById('responce').innerHTML += "<p id='"+totaladr+"'><input type='text' class='input_text' name='adrname' id='adrname"+totaladr+"'> <input type='button' id='"+totaladr+"' value='УДАЛИТЬ' onclick=remove_field('"+totaladr+"');></p>";
         }
         // отвечает за удаление полей с адресом
         function remove_field(id)
         {
-          document.getElementById(id+"_wrapper").innerHTML="";
-          totaladr--;
+          document.getElementById(id).innerHTML="";
         }
     </script>
 
