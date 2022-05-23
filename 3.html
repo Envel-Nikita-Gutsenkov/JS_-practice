@@ -76,7 +76,8 @@
     </form>
 
     <script>
-        let totaladr=0;
+        let totaladr = 0;
+
         // формирует вывод при нажатии на кнопку выполнить
         function myFunction1() {
             let inf = "";
@@ -96,12 +97,12 @@
             inf = inf + "<p><li><b>Адрес:</b> " + document.myform.youraddr.value;
 
             // дополнительные поля адреса
-            var inputs=document.getElementsByName("adrname");
-            var adrnamesum="";
-            for (var j=0;j<inputs.length;j++) {
-                adrnamesum+=", "+inputs[j].value;
+            var inputs = document.getElementsByName("adrname");
+            var adrnamesum = "";
+            for (var j = 0; j < inputs.length; j++) {
+                adrnamesum += ", " + inputs[j].value;
             }
-            inf = inf +adrnamesum;
+            inf = inf + adrnamesum;
 
             inf = inf + "<p><li><b>Телефон:</b> " + document.myform.yourphone.value;
 
@@ -123,12 +124,12 @@
         // отвечает за добавление полей с адресом
         function addInput() {
             totaladr++;
-            document.getElementById('responce').innerHTML += "<p id='"+totaladr+"'><input type='text' class='input_text' name='adrname' id='adrname"+totaladr+"'> <input type='button' id='"+totaladr+"' value='УДАЛИТЬ' onclick=remove_field('"+totaladr+"');></p>";
+            document.getElementById('responce').innerHTML += "<p id='" + totaladr + "'><input type='text' class='input_text' name='adrname' id='adrname" + totaladr + "'> <input type='button' id='" + totaladr + "' value='УДАЛИТЬ' onclick=remove_field('" + totaladr + "');></p>";
         }
+
         // отвечает за удаление полей с адресом
-        function remove_field(id)
-        {
-          document.getElementById(id).innerHTML="";
+        function remove_field(id) {
+            document.getElementById(id).innerHTML = "";
         }
     </script>
 

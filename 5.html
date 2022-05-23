@@ -116,15 +116,15 @@
             <input class="value" id="myname" maxlength=80 size="48" style="font-weight: bold;" type="text">
         </p>
         <p class="p1">
-            <p>Пол:</p>
-            <input type="radio" id="man" name="pol" value="man">
-            <label for="man">Мужской</label><br>
-            <input type="radio" id="wom" name="pol" value="wom">
-            <label for="wom">Женский</label><br>
+        <p>Пол:</p>
+        <input type="radio" id="man" name="pol" value="man">
+        <label for="man">Мужской</label><br>
+        <input type="radio" id="wom" name="pol" value="wom">
+        <label for="wom">Женский</label><br>
         </p>
         <p class="p1">
-            <p>Возраст:</p>
-            <select id="age"></select><br><br>
+        <p>Возраст:</p>
+        <select id="age"></select><br><br>
         </p>
     </form>
 
@@ -139,6 +139,7 @@
                 document.getElementById('age').appendChild(option)
             }
         }
+
         let _age = createOptions(100);
 
         /* Результаты теста. text1 - ответы, text3 - вопросы.
@@ -190,9 +191,9 @@
             let x = document.getElementById("myname").value; // фио
             let y = document.getElementById("age").value; // возраст
             let z; // пол
-            if(document.getElementById('man').checked === true)
+            if (document.getElementById('man').checked === true)
                 z = "мужской";
-            if(document.getElementById('wom').checked === true)
+            if (document.getElementById('wom').checked === true)
                 z = "женский";
             // 3.Циклически задать не менее 10 вопросов с 4 вариантами ответов (через диалоговое окно).
             // считаем время на каждый ответ, это количество миллисекунд с 1 января 1970
@@ -306,7 +307,7 @@
                             break;
                         case 3:
                             cellText = document.createTextNode(testarr[i]);
-                            if (testarr[i]==results.text1[i])
+                            if (testarr[i] == results.text1[i])
                                 cell.style.backgroundColor = "green";
                             break;
                         case 4:
